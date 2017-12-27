@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "baseApp/themes/default/easyui.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "baseApp/themes/icon.css" %}">
+    <script type="text/javascript" src="{% static "baseApp/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "baseApp/jquery.easyui.min.js" %}"></script>
+</head>
+<body>
+
+{% block content %}
+    <div>This is some default content of the website.Please over-write it</div>
+{% endblock %}
+
+</body>
+
+</html>
+
+

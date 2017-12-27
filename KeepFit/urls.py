@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^index/', baseView.index,name="index"),
     url(r'^login/', baseView.login,name="login"),
     url(r'^checkLogin/', baseView.checkLogin,name="checkLogin"),
+    url(r'^register/', baseView.register,name="register"),
+    url(r'^registerIn/', baseView.registerIn,name="registerIn"),
 ]
