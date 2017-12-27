@@ -18,5 +18,7 @@ from django.contrib import admin
 from baseApp import views as baseView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/', baseView.index),
+    url(r'^index/', baseView.index,name="index"),
+    url(r'^login/', baseView.login,name="login"),
+    url(r'^checkLogin/', baseView.checkLogin,name="checkLogin"),
 ]

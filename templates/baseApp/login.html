@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "baseApp/themes/default/easyui.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "baseApp/themes/icon.css" %}">
+    <script type="text/javascript" src="{% static "baseApp/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "baseApp/jquery.easyui.min.js" %}"></script>
+</head>
+<body>
+<div style="width:65%;margin-left:35%;margin-top:20%">
+    <div class="easyui-panel" title="请登录" style="width:35%">
+    <div style="padding:10px 60px 20px 60px">
+        <form id="ff" method="post">
+            <table cellpadding="5">
+                <tr>
+                    <td>姓名:</td>
+                    <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
+                </tr>
+                <tr>
+                    <td>密码:</td>
+                    <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
+                </tr>
+            </table>
+        </form>
+        <div style="padding:5px 0;margin-left: 38%;">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Add</a>
+        </div>
+        <div style="text-align:center;padding:5px">
+            <a href="{% url 'checkLogin' %}" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">清除</a>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    function submitForm(){
+        $('#ff').form('submit');
+    }
+    function clearForm(){
+        $('#ff').form('clear');
+    }
+</script>
+
+</body>
+
+</html>
+
+
