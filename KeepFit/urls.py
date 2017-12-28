@@ -19,7 +19,8 @@ from baseApp import views as baseView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index/', baseView.index,name="index"),
-    url(r'^login/', baseView.login,name="login"),
+    url(r'^login/$', baseView.login,name="login"),
+    url(r'^login/(?P<state>\w{1})/$',baseView.login, name='login_with_args'),
     url(r'^checkLogin/', baseView.checkLogin,name="checkLogin"),
     url(r'^register/', baseView.register,name="register"),
     url(r'^registerIn/', baseView.registerIn,name="registerIn"),

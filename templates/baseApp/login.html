@@ -1,5 +1,15 @@
 {% extends 'baseApp/base.html' %}
 {% block content %}
+<script>
+    (function () {
+        var state = {% if state %}{{ state }}{% else %}''{% endif %};
+        if ( state == '0') {
+            alert("登陆后方可进行标定工作！");
+        } else if (state == '1') {
+            alert("登录姓名或者密码错误，请重试！");
+        }
+    }())
+</script>
     <div style="width:65%;margin-left:35%;margin-top:20%">
     <div class="easyui-panel" title="请登录" style="width:35%">
     <div style="padding:10px 60px 20px 60px">
@@ -24,9 +34,6 @@
     function submitForm(){
         //校验表单信息
         return true;
-    }
-    function clearForm(){
-        $('#logindata').form('clear');
     }
 </script>
 {% endblock %}
