@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
+from baseApp.models import LoginDatas
+from tools import *
 # Create your views here.
 def index(request):
+    # cookie 验证
     return render(request, 'baseApp/index.html')
 
 def login(request):
@@ -10,9 +13,13 @@ def login(request):
 def checkLogin(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
-    print(username)
-    print(password)
-    return render(request, 'baseApp/index.html')
+    isuser = getUserPassword(username,password)
+    if ("1"==isuser):
+        # 写cookie
+        return render(request, 'baseApp/index.html')
+    else:
+        # 提示账号密码错误
+        return render(request, 'baseApp/login.html')
 
 def register(request):
     return render(request, 'baseApp/register.html')
@@ -20,6 +27,7 @@ def register(request):
 def registerIn(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
-    print(username)
-    print(password)
+    userdata = LoginDatas(Username=username, Password=password)
+    userdata.save()
+    # 写cookie
     return render(request, 'baseApp/index.html')
