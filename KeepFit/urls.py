@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^login/$', baseView.login,name="login"),
     url(r'^login/(?P<state>\w{1})/$',baseView.login, name='login_with_args'),
     url(r'^checkLogin/', baseView.checkLogin,name="checkLogin"),
-    url(r'^register/', baseView.register,name="register"),
+    url(r'^register/$', baseView.register,name="register"),
     url(r'^registerIn/', baseView.registerIn,name="registerIn"),
+    url(r'^register/(?P<state>\w{1})/$',baseView.register, name='register_with_args'),
 ]

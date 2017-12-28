@@ -1,34 +1,38 @@
 ﻿{% extends 'baseApp/base.html' %}
 {% block content %}
+<script>
+    (function () {
+        var state = {% if state %}{{ state }}{% else %}''{% endif %};
+        if ( state == '1') {
+            alert("该名称已经被使用，请您选择其他用户名称!");
+        }
+    }())
+</script>
     <div style="width:65%;margin-left:35%;margin-top:20%">
-    <div class="easyui-panel" title="请注册" style="width:35%">
-    <div style="padding:10px 60px 20px 60px">
-        <form id="registedata" method="post" action="{% url 'registerIn' %}" onsubmit="return submitForm()">
-            {% csrf_token %}
-            <table cellpadding="5">
-                <tr>
-                    <td>姓名:</td>
-                    <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"></td>
-                </tr>
-                <tr>
-                    <td>密码:</td>
-                    <td><input class="easyui-textbox" type="text" name="password" data-options="required:true"></td>
-                </tr>
-            </table>
-            <input type="submit" class="easyui-linkbutton" value="提交" />
-{#            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">清除</a>#}
-        </form>
-
+        <div class="easyui-panel" title="请注册" style="width:35%">
+            <div style="padding:10px 60px 20px 60px">
+                <form id="registedata" method="post" action="{% url 'registerIn' %}" onsubmit="return submitForm()">
+                    {% csrf_token %}
+                    <table cellpadding="5">
+                        <tr>
+                            <td>姓名:</td>
+                            <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"></td>
+                        </tr>
+                        <tr>
+                            <td>密码:</td>
+                            <td><input class="easyui-textbox" type="text" name="password" data-options="required:true"></td>
+                        </tr>
+                    </table>
+                    <div style="margin:5px 0;"> </div>
+                    <input type="submit" class="easyui-linkbutton" value="提交" style="width: 35%;margin-left: 35%"/>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 <script>
     function submitForm(){
         //校验表单信息
         return true;
-    }
-    function clearForm(){
-        $('#registedata').form('clear');
     }
 </script>
 {% endblock %}
