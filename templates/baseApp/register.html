@@ -4,7 +4,8 @@
     (function () {
         var state = {% if state %}{{ state }}{% else %}''{% endif %};
         if ( state == '1') {
-            alert("该名称已经被使用，请您选择其他用户名称!");
+{#            alert("该名称已经被使用，请您选择其他用户名称!");#}
+            $.messager.alert('Keep Fit','该名称已经被使用，请您选择其他用户名称!','info');
         }
     }())
 </script>
