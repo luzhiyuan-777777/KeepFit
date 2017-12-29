@@ -133,4 +133,5 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, 'static/'),
     os.path.join(BASE_DIR, 'static/baseApp'),
+    os.path.join(BASE_DIR, 'static/baseApp/img'),
 )

@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^register/$', baseView.register,name="register"),
     url(r'^registerIn/', baseView.registerIn,name="registerIn"),
     url(r'^register/(?P<state>\w{1})/$',baseView.register, name='register_with_args'),
+    url(r'^indexForm/', baseView.indexForm,name="indexForm"),
+    url(r'^firstSightForm/', baseView.firstSightForm,name="firstSightForm"),
 ]

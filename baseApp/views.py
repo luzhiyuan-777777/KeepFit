@@ -13,12 +13,17 @@ def index(request):
     return redirect('login_with_args', state='0')
 
 def login(request, **kwargs):
-    state = ''
-    if kwargs:
-        state = str(kwargs['state'])
+    if 'Username' in request.COOKIES:
+        username = request.COOKIES.get('Username', '')
+        if username:
+            return render(request, 'baseApp/index.html')
     else:
-        print('no kwargs in login')
-    return render(request, 'baseApp/login.html', {'state': state})
+        state = ''
+        if kwargs:
+            state = str(kwargs['state'])
+        else:
+            print('no kwargs in login')
+        return render(request, 'baseApp/login.html', {'state': state})
 
 def checkLogin(request):
     if request.method == 'POST':
@@ -60,3 +65,25 @@ def writeCookie(request,username):
     response.set_cookie(
         'Username', username, expires=datetime.datetime.now() + datetime.timedelta(days=3))
     return response
+
+
+def indexForm(request):
+    if 'Username' in request.COOKIES:
+        sex = request.POST.get('sex', '')
+        print(sex)
+        age = request.POST.get('age', '')
+        hurtname = request.POST.get('hurtname', '')
+        # 分析请求数据 返回前端页面相应值和初视数据
+        return render(request, 'baseApp/detail.html', {'Message': 'aaa','sex':sex,'age':age,'hurtname':hurtname})
+    else:
+        return render(request, 'baseApp/error.html', {'Message': 'aaa'})
+
+def firstSightForm(request):
+    if 'Username' in request.COOKIES:
+        sex = request.POST.get('sex', '')
+        age = request.POST.get('age', '')
+        hurtname = request.POST.get('hurtname', '')
+        # 分析请求数据 返回前端页面相应值和推荐治疗穴位
+        return render(request, 'baseApp/detail.html', {'Message':'aaa','sex':sex,'age':age,'hurtname':hurtname})
+    else:
+        return render(request, 'baseApp/error.html', {'Message': 'aaa'})
