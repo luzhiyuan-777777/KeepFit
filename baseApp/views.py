@@ -79,6 +79,7 @@ def indexForm(request):
                'age': age,
                'message': message,
                'hurtname': hurtname}
+        # TODO(2017.12.31):待添加前端分类跳转功能 1 初视页 2 详细建议页
         return render(request, 'baseApp/detail.html', {'Message': message})
     else:
         return render(request, 'baseApp/error.html', {'Message': 'aaa'})
