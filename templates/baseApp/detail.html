@@ -101,8 +101,10 @@
         <form id="searchForm" action="{% url "firstSightForm" %}" method="post">
             {% csrf_token %}
             <label>性别：</label><input type="radio" name="sex" class="man" value="man">男<input type="radio" name="sex" class="woman" value="woman">女<br>
-            <label>年龄：</label><select name="age"><option value="15">15~18</option><option value="18">18~22</option><option value="22">22~25</option><option value="25">25~35</option><option value="35">35~45</option></select><br>
-            <label>疼的地方:</label><input type="text" name="hurtname">
+            <label>年龄：</label><select name="age" id="age"><option value="15">15~18</option><option value="18">18~22</option><option value="22">22~25</option><option value="25">25~35</option><option value="35">35~45</option></select><br>
+            <label>疼的地方:</label><input type="text" name="hurtname" id="hurtname">
+            <label>初步建议:</label><textarea rows="3" cols="20" readonly="readonly">{{ Message.firstSuggest }}</textarea>
+{#            <input type="submit" class="easyui-linkbutton" value="不符合情况" style="width: 35%;margin-left: 35%;background:#4fd1fe;"/>#}
             <input type="submit" class="easyui-linkbutton" value="以上刚符合" style="width: 35%;margin-left: 35%;background:#4fd1fe;"/>
         </form>
     </div>
@@ -110,15 +112,17 @@
 </body>
 <script>
     (function () {
-        var sex = "{% if sex %}{{ sex }}{% else %}''{% endif %}";
-        console.log('sex:'+sex);
+        var sex = "{% if Message.sex %}{{ Message.sex }}{% else %}''{% endif %}";
         if ( sex == 'man') {
             $("input[name='sex']").get(0).checked='checked';
             // location.href = 'Login';
         } else if (sex == 'woman') {
-            //$("input[name='sex']").get(0).checked=true;
-            // location.href = 'Login';
+            $("input[name='sex']").get(1).checked='checked';
         }
+        var age = "{% if Message.age %}{{ Message.age }}{% else %}''{% endif %}";
+        $("#age option[value='"+age+"']").attr("selected","selected");
+        var hurtname = "{% if Message.hurtname %}{{ Message.hurtname }}{% else %}''{% endif %}";
+        $("#hurtname").val(hurtname);
     }())
 </script>
 </html>

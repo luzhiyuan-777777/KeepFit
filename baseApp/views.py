@@ -70,11 +70,16 @@ def writeCookie(request,username):
 def indexForm(request):
     if 'Username' in request.COOKIES:
         sex = request.POST.get('sex', '')
-        print(sex)
         age = request.POST.get('age', '')
         hurtname = request.POST.get('hurtname', '')
         # 分析请求数据 返回前端页面相应值和初视数据
-        return render(request, 'baseApp/detail.html', {'Message': 'aaa','sex':sex,'age':age,'hurtname':hurtname})
+        message = {}
+        message = {'firstSuggest': 'aaa',
+               'sex': sex,
+               'age': age,
+               'message': message,
+               'hurtname': hurtname}
+        return render(request, 'baseApp/detail.html', {'Message': message})
     else:
         return render(request, 'baseApp/error.html', {'Message': 'aaa'})
 
@@ -84,6 +89,6 @@ def firstSightForm(request):
         age = request.POST.get('age', '')
         hurtname = request.POST.get('hurtname', '')
         # 分析请求数据 返回前端页面相应值和推荐治疗穴位
-        return render(request, 'baseApp/detail.html', {'Message':'aaa','sex':sex,'age':age,'hurtname':hurtname})
+        return render(request, 'baseApp/solution.html', {'finalSuggest':'aaa'})
     else:
         return render(request, 'baseApp/error.html', {'Message': 'aaa'})
