@@ -29,6 +29,7 @@ def checkLogin(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
+        #TODO 前端 onsubmit 时 前端和后台校验必填项
         isuser = getUserPassword(username,password)
         if ("1" == isuser):
             # 写cookie
