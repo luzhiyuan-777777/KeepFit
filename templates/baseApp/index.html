@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Keep Fit</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static "baseApp/themes/default/easyui.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "baseApp/themes/icon.css" %}">
-    <script type="text/javascript" src="{% static "baseApp/jquery.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "baseApp/jquery.easyui.min.js" %}"></script>
-</head>
+{% extends 'baseApp/base.html' %}
+{% block content %}
 <style>
     /* html,body{
          width:100%;
@@ -98,14 +89,24 @@
     <h1>首页</h1>
     <div class="searchdiv"><input type="text" class="search" placeholder="输入想要搜索的内容"></div>
     <div class="inputsearch">
-        <form id="searchForm" action="{% url "indexForm" %}" method="post">
+        <form id="searchForm" action="{% url "indexForm" %}" method="post" onsubmit="return submitForm()">
             {% csrf_token %}
-            <label>性别：</label><input type="radio" name="sex" class="man" value="man">男<input type="radio" name="sex" class="woman" value="woman">女<br>
-            <label>年龄：</label><select name="age"><option value="15">15~18</option><option value="18">18~22</option><option value="22">22~25</option><option value="25">25~35</option><option value="35">35~45</option></select><br>
-            <label>疼的地方:</label><input type="text" name="hurtname">
+            <label>性别：</label><input type="radio" name="sex" class="man" value="man" checked="checked">男<input type="radio" name="sex" class="woman" value="woman">女<br>
+            <label>年龄：</label><select name="age" id="age"><option value="15">15~18</option><option value="18">18~22</option><option value="22">22~25</option><option value="25">25~35</option><option value="35">35~45</option></select><br>
+            <label>疼的地方:</label><input type="text" name="hurtname" id="hurtname"/>
             <input type="submit" class="easyui-linkbutton" value="提交" style="width: 35%;margin-left: 35%;background:#4fd1fe;"/>
         </form>
     </div>
 </div>
-</body>
-</html>
+<script>
+    function submitForm(){
+        var age = $('#age').val();
+        var hurtname = $('#hurtname').val();
+        if(!isNull(age,"用户年龄不能为空")){
+            return false;
+        }else{
+            return isNull(hurtname,"请输入您不舒服的部位");
+        }
+    }
+</script>
+{% endblock %}

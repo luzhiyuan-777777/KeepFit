@@ -29,7 +29,6 @@ def checkLogin(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
-        #TODO 前端 onsubmit 时 前端和后台校验必填项
         isuser = getUserPassword(username,password)
         if ("1" == isuser):
             # 写cookie
@@ -75,6 +74,7 @@ def indexForm(request):
         hurtname = request.POST.get('hurtname', '')
         notright = request.POST.get('notright', '')
         # 分析请求数据 返回前端页面相应值和初视数据
+        # TODO 写入初始32个经络及其症状  根据部位返回初步诊断建议
         message = {}
         message = {'firstSuggest': 'aaa',
                'sex': sex,

@@ -24,11 +24,11 @@ a .easyui-linkbutton {
                     <table cellpadding="5">
                         <tr>
                             <td>姓名:</td>
-                            <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"></td>
+                            <td><input class="easyui-textbox" type="text" name="username" data-options="required:true" id="username"></td>
                         </tr>
                         <tr>
                             <td>密码:</td>
-                            <td><input class="easyui-textbox" type="text" name="password" data-options="required:true"></td>
+                            <td><input class="easyui-textbox" type="text" name="password" data-options="required:true" id="password"></td>
                         </tr>
                     </table>
                     <div style="margin:5px 0;"> </div>
@@ -41,8 +41,13 @@ a .easyui-linkbutton {
     </div>
 <script>
     function submitForm(){
-        //校验表单信息
-        return true;
+        var username = $('#username').val();
+        var password = $('#password').val();
+        if(!isNull(username,"用户名不能为空！")){
+            return false;
+        }else{
+            return isNull(password,"用户密码不能为空！");
+        }
     }
 </script>
 {% endblock %}
