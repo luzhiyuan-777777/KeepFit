@@ -10,3 +10,37 @@ class LoginDatas(models.Model):
 
     def __unicode__(self):
         return self.Username
+
+class Symptom(models.Model):
+    # symptom
+    Meridian = models.CharField(max_length=30)
+    MeridianName = models.CharField(max_length=30)
+    CreateTime = models.DateField(auto_now_add=True)
+    UpdateTime = models.DateField(auto_now=True)
+    Symptom = models.TextField()
+    ValidFlag = models.CharField(max_length=2)
+    MeridianRoute = models.TextField(default='经络路线')
+
+    def __unicode__(self):
+        return self.Meridian
+
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.CreateTime = datetime.now
+        self.UpdateTime = datetime.now
+        return super(Symptom, self).save(*args, **kwargs)
+
+class Point(models.Model):
+    # Point
+    Meridian = models.CharField(max_length=30)
+    MeridianName = models.CharField(max_length=30)
+    CreateTime = models.DateField(auto_now_add=datetime.now, blank=True)
+    UpdateTime = models.DateField(auto_now=datetime.now, blank=True)
+    PointPosition = models.TextField()
+    ValidFlag = models.CharField(max_length=2)
+    Point = models.CharField(max_length=30)
+    PointName = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return self.Point

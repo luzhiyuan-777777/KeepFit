@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
-from baseApp.models import LoginDatas
+from baseApp.models import LoginDatas,Point
 import datetime
 from tools import *
 # Create your views here.
@@ -74,7 +74,7 @@ def indexForm(request):
         hurtname = request.POST.get('hurtname', '')
         notright = request.POST.get('notright', '')
         # 分析请求数据 返回前端页面相应值和初视数据
-        # TODO 写入初始32个经络及其症状  根据部位返回初步诊断建议
+        # TODO 写入初始32个易堵穴位及其位置  根据部位返回初步诊断建议
         message = {}
         message = {'firstSuggest': 'aaa',
                'sex': sex,
@@ -94,3 +94,8 @@ def firstSightForm(request):
         return render(request, 'baseApp/solution.html', {'finalSuggest':'aaa'})
     else:
         return render(request, 'baseApp/error.html', {'Message': 'aaa'})
+
+def data2db(request):
+    data = Point(Meridian='Kidney Meridian', MeridianName='肾经',PointPosition='a',ValidFlag='1')
+    data.save()
+    return HttpResponse('data 2 db successed!')
