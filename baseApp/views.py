@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from baseApp.models import LoginDatas,Point
 import datetime
 from tools import *
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def index(request):
     # cookie 验证
@@ -96,6 +97,6 @@ def firstSightForm(request):
         return render(request, 'baseApp/error.html', {'Message': 'aaa'})
 
 def data2db(request):
-    data = Point(Meridian='Kidney Meridian', MeridianName='肾经',PointPosition='a',ValidFlag='1')
+    data = Point(Meridian='LiverMeridian', MeridianName='肝经',PointName='阴包穴',Point='LIV9',PointPosition='屈膝，大腿内侧中线膝关节上4寸处',ValidFlag='1')
     data.save()
     return HttpResponse('data 2 db successed!')

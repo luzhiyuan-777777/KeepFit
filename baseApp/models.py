@@ -33,14 +33,15 @@ class Symptom(models.Model):
 
 class Point(models.Model):
     # Point
+    Point = models.CharField(max_length=30)
+    PointName = models.CharField(max_length=30)
     Meridian = models.CharField(max_length=30)
     MeridianName = models.CharField(max_length=30)
     CreateTime = models.DateField(auto_now_add=datetime.now, blank=True)
     UpdateTime = models.DateField(auto_now=datetime.now, blank=True)
     PointPosition = models.TextField()
+    PointStep = models.CharField(max_length=2,default='1')
     ValidFlag = models.CharField(max_length=2)
-    Point = models.CharField(max_length=30)
-    PointName = models.CharField(max_length=30)
 
     def __unicode__(self):
         return self.Point
