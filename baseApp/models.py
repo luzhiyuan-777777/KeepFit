@@ -45,3 +45,26 @@ class Point(models.Model):
 
     def __unicode__(self):
         return self.Point
+
+class WxUserInfo(models.Model):
+    #
+    useropenid = models.CharField(max_length=100)
+    nickname = models.CharField(max_length=30)
+    gender = models.CharField(max_length=30)
+    language = models.CharField(max_length=30)
+    city = models.CharField(max_length=30)
+    province = models.TextField()
+    avatarUrl = models.TextField()
+    createtime = models.DateField(auto_now_add=datetime.now, blank=True)
+    updatetime = models.DateField(auto_now=datetime.now, blank=True)
+    validflag = models.CharField(max_length=2)
+
+    def __unicode__(self):
+        return self.nickname
+
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.createtime = datetime.now
+        self.updatetime = datetime.now
+        return super().save(*args, **kwargs)

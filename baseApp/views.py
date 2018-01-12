@@ -96,7 +96,23 @@ def firstSightForm(request):
     else:
         return render(request, 'baseApp/error.html', {'Message': 'aaa'})
 
-def data2db(request):
-    data = Point(Meridian='LiverMeridian', MeridianName='肝经',PointName='阴包穴',Point='LIV9',PointPosition='屈膝，大腿内侧中线膝关节上4寸处',ValidFlag='1')
-    data.save()
-    return HttpResponse('data 2 db successed!')
+@csrf_exempt
+def wxUser2Db4Id(request):
+    if request.method == 'POST':
+        userOpenId = request.POST.get('userOpenId', '')
+        userinfo = request.POST.get('res', '')
+        if not (userinfo or userOpenId):
+            message = {
+                'recCode': "failed",
+                'openid': ''
+            }
+            return HttpResponse(json.dumps(message)) # 传输数据丢失
+        userInfoJson = string2json(userinfo)
+        userid = getWxUserInfo(userOpenId)
+        if(userid.__len__() ==0 ):
+            wxUser2Db(userInfoJson, userOpenId)
+        message = {
+        'recCode' : "successed",
+        'openid' : userOpenId
+        }
+        return HttpResponse(json.dumps(message))
