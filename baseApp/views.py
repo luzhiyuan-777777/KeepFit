@@ -75,7 +75,7 @@ def indexForm(request):
         hurtname = request.POST.get('hurtname', '')
         notright = request.POST.get('notright', '')
         # 分析请求数据 返回前端页面相应值和初视数据
-        # TODO 写入初始32个易堵穴位及其位置  根据部位返回初步诊断建议
+        # TODO 根据部位返回初步诊断建议
         message = {}
         message = {'firstSuggest': 'aaa',
                'sex': sex,
@@ -96,7 +96,7 @@ def firstSightForm(request):
     else:
         return render(request, 'baseApp/error.html', {'Message': 'aaa'})
 
-@csrf_exempt
+@csrf_exempt # TODO 1 写微信前端首页页面  2 访问"初视"数据  3 添加用户搜索表
 def wxUser2Db4Id(request):
     if request.method == 'POST':
         userOpenId = request.POST.get('userOpenId', '')
