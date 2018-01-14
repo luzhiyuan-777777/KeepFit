@@ -96,7 +96,7 @@ def firstSightForm(request):
     else:
         return render(request, 'baseApp/error.html', {'Message': 'aaa'})
 
-@csrf_exempt # TODO 1 写微信前端首页页面  2 访问"初视"数据  3 添加用户搜索表
+@csrf_exempt
 def wxUser2Db4Id(request):
     if request.method == 'POST':
         userOpenId = request.POST.get('userOpenId', '')
@@ -114,5 +114,20 @@ def wxUser2Db4Id(request):
         message = {
         'recCode' : "successed",
         'openid' : userOpenId
+        }
+        return HttpResponse(json.dumps(message))
+
+@csrf_exempt
+def wxFirstSight(request):
+    if request.method == 'POST':
+        userqueryinfo = request.POST.get('queryData', '')
+        hurtname = "" # 不舒服的部位
+        if userqueryinfo :
+            userqueryinfo = string2json(userqueryinfo)
+            hurtname = userqueryinfo['disname']
+        # TODO 1 优化微信前端首页页面  2 根据不舒服的部位信息返回相应的初视治疗信息  3 添加用户搜索表
+        message = {
+        'recCode' : "successed",
+        'openid' : ''
         }
         return HttpResponse(json.dumps(message))
