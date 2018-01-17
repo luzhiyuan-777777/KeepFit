@@ -27,7 +27,5 @@ def wxUser2Db(userInfoJson,userOpenId):
 
 def getWxUserInfo(useropenid):
     data = WxUserInfo.objects.filter(useropenid=useropenid)
-    if data:
-        return data
-    else:
-        return ""
+    return data
+

@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from baseApp.models import LoginDatas,Point
 import datetime
 from tools import *
+from business import getFirstSightPlan
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def index(request):
@@ -109,7 +110,7 @@ def wxUser2Db4Id(request):
             return HttpResponse(json.dumps(message)) # 传输数据丢失
         userInfoJson = string2json(userinfo)
         userid = getWxUserInfo(userOpenId)
-        if(userid.__len__() ==0 ):
+        if(userid.count() == 0):
             wxUser2Db(userInfoJson, userOpenId)
         message = {
         'recCode' : "successed",
@@ -121,13 +122,16 @@ def wxUser2Db4Id(request):
 def wxFirstSight(request):
     if request.method == 'POST':
         userqueryinfo = request.POST.get('queryData', '')
-        hurtname = "" # 不舒服的部位
+        openid = request.POST.get('openid', '')
+        firstsightplan = {}
         if userqueryinfo :
             userqueryinfo = string2json(userqueryinfo)
-            hurtname = userqueryinfo['disname']
-        # TODO 1 优化微信前端首页页面  2 根据不舒服的部位信息返回相应的初视治疗信息  3 添加用户搜索表
+            userinfo = getWxUserInfo(openid)
+            # 根据不舒服的部位信息返回相应的初视治疗信息
+            firstsightplan = getFirstSightPlan(userqueryinfo,userinfo)
+        # TODO 1 优化微信前端首页页面  3 添加用户搜索表
         message = {
         'recCode' : "successed",
-        'openid' : ''
+        'plan' : firstsightplan
         }
         return HttpResponse(json.dumps(message))
