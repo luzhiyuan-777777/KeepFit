@@ -129,7 +129,7 @@ def wxFirstSight(request):
             userinfo = getWxUserInfo(openid)
             # 根据不舒服的部位信息返回相应的初视治疗信息
             firstsightplan = getFirstSightPlan(userqueryinfo,userinfo)
-        # TODO 1 优化微信前端首页页面  2 添加用户搜索表  3 写"初视"页面
+        # TODO   1 添加用户搜索表  2 写"初视"页面
         message = {
         'recCode' : "successed",
         'plan' : firstsightplan
