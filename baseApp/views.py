@@ -123,13 +123,13 @@ def wxFirstSight(request):
     if request.method == 'POST':
         userqueryinfo = request.POST.get('queryData', '')
         openid = request.POST.get('openid', '')
-        firstsightplan = {}
+        firstsightplan = []
         if userqueryinfo :
             userqueryinfo = string2json(userqueryinfo)
             userinfo = getWxUserInfo(openid)
             # 根据不舒服的部位信息返回相应的初视治疗信息
             firstsightplan = getFirstSightPlan(userqueryinfo,userinfo)
-        # TODO   1 添加用户搜索表  2 写"初视"页面
+        # TODO   1 添加用户搜索表  2 调整"初视"页面
         message = {
         'recCode' : "successed",
         'plan' : firstsightplan
