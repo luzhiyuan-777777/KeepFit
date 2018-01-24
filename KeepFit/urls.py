@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^firstSightForm/', baseView.firstSightForm,name="firstSightForm"),
     url(r'^wx/user2Db4Id/', baseView.wxUser2Db4Id,name="wxUser2Db4Id"),
     url(r'^wx/firstSight/', baseView.wxFirstSight,name="wxFirstSight"),
+    url(r'^wx/firstPlan/', baseView.wxFirstPlan,name="wxFirstPlan"),
 ]

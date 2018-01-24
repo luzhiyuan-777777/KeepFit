@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from baseApp.models import LoginDatas,Point
 import datetime
 from tools import *
-from business import getFirstSightPlan
+from business import getFirstSightPlan,getFirstPlan
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def index(request):
@@ -129,9 +129,29 @@ def wxFirstSight(request):
             userinfo = getWxUserInfo(openid)
             # 根据不舒服的部位信息返回相应的初视治疗信息
             firstsightplan = getFirstSightPlan(userqueryinfo,userinfo)
-        # TODO   1 添加用户搜索表  2 调整"初视"页面
+        # TODO   1 添加用户搜索表
         message = {
         'recCode' : "successed",
         'plan' : firstsightplan
         }
+        return HttpResponse(json.dumps(message))
+
+@csrf_exempt
+def wxFirstPlan(request):
+    # TODO   2 初视和第一建议页 返回数据错误或空页面处理
+    if request.method == 'POST':
+        meridian = request.POST.get('queryData', '')
+        disname = request.POST.get('disname', '')
+        print(disname)
+        firstPlan = getFirstPlan(meridian)
+        if firstPlan:
+            message = {
+                'recCode': "successed",
+                'plan': firstPlan
+            }
+        else:
+            message = {
+                'recCode': "failed",
+                'plan': ""
+            }
         return HttpResponse(json.dumps(message))
