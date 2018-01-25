@@ -138,16 +138,16 @@ def wxFirstSight(request):
 
 @csrf_exempt
 def wxFirstPlan(request):
-    # TODO   2 初视和第一建议页 返回数据错误或空页面处理
     if request.method == 'POST':
         meridian = request.POST.get('queryData', '')
         disname = request.POST.get('disname', '')
-        print(disname)
-        firstPlan = getFirstPlan(meridian)
+        firstPlan,MeridianName = getFirstPlan(meridian)
         if firstPlan:
             message = {
                 'recCode': "successed",
-                'plan': firstPlan
+                'plan': firstPlan,
+                'disname':disname,
+                'meridianName':MeridianName
             }
         else:
             message = {

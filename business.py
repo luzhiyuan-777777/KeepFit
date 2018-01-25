@@ -25,7 +25,7 @@ def getFirstSightPlan(userqueryinfo,userinfo):
 
 def getFirstPlan(meridian):
     list = []
-    dict = {}
+    MeridianName = ""
     if meridian:
         data = Point.objects.filter(Meridian=meridian)
         if data :
@@ -35,7 +35,8 @@ def getFirstPlan(meridian):
                 dictionary["PointName"] = item.PointName
                 dictionary["PointStep"] = item.PointStep
                 dictionary["PointPosition"] = item.PointPosition
+                MeridianName = item.MeridianName
                 list.append(dictionary)
-        return list
+        return list,MeridianName
     else:
-        return dict
+        return list,MeridianName
